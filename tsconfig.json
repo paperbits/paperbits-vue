@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": [
+            "es2018",
+            "dom"
+        ],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": false,
+        "noImplicitAny": false,
+        "noStrictGenericChecks": true,
+        "removeComments": true,
+        "noLib": false,
+        "skipLibCheck": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "allowUnreachableCode": true,
+        "listFiles": false,
+        "sourceMap": false,
+        "allowSyntheticDefaultImports": true,
+        "incremental": true
+    },
+    "exclude": [
+        "./node_modules"
+    ]
+}

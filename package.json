@@ -1,0 +1,20 @@
+{
+    "name": "@paperbits/vue",
+    "version": "1.0.0",
+    "description": "Vue modules for Paperbits.",
+    "license": "MIT",
+    "author": "Paperbits",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/paperbits/paperbits-vue.git"
+    },
+    "keywords": [
+        "paperbits",
+        "vue"
+    ],
+    "dependencies": {
+        "@paperbits/common": "0.1.389",
+        "reflect-metadata": "^0.1.13",
+        "vue": "^2.6.12"
+    }
+}
