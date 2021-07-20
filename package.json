@@ -13,7 +13,7 @@
         "vue"
     ],
     "dependencies": {
-        "@paperbits/common": "0.1.389",
+        "@paperbits/common": "0.1.418",
         "reflect-metadata": "^0.1.13",
         "vue": "^2.6.12"
     }

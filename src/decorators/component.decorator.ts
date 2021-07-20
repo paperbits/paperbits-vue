@@ -21,7 +21,8 @@ export function Component(config: ComponentConfig): ClassDecorator {
             data: () => Component.prototype.getInstance(target),
             methods: {},
             computed: {},
-            watch: {}
+            watch: {},
+            i18n: config.i18n
         };
 
         const propertyNames = Object.getOwnPropertyNames(target.prototype);
