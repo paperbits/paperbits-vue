@@ -22,6 +22,7 @@ export function Component(config: ComponentConfig): ClassDecorator {
             methods: {},
             computed: {},
             watch: {},
+            components: config.components,
             i18n: config.i18n
         };
 

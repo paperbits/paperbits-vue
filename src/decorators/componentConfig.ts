@@ -10,4 +10,5 @@ export interface ComponentConfig {
     selector: string;
     template: string;
     i18n?: any;
+    components?: any;
 }
