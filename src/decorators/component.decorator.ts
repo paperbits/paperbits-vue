@@ -23,7 +23,8 @@ export function Component(config: ComponentConfig): ClassDecorator {
             computed: {},
             watch: {},
             components: config.components,
-            i18n: config.i18n
+            i18n: config.i18n,
+            name: config.selector
         };
 
         const propertyNames = Object.getOwnPropertyNames(target.prototype);
@@ -59,7 +60,11 @@ export function Component(config: ComponentConfig): ClassDecorator {
             vueComponentConfig.methods[name] = method;
         });
 
-        Vue.component(config.selector, vueComponentConfig);
+        const component = Vue.component(config.selector, vueComponentConfig);
+
+        Reflect.defineMetadata("paperbits-vue-component", {
+            component: component,
+        }, target)
 
         /*
             Just in case, async also supported:
