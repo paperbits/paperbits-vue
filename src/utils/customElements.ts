@@ -7,9 +7,7 @@
  */
 
 import Vue from "vue";
-import vueCustomElement from "vue-custom-element"
-
-Vue.use(vueCustomElement);
+import wrap from "./customElementsWrapper";
 
 /**
  * Registers specified Vue component as custom element.
@@ -17,9 +15,6 @@ Vue.use(vueCustomElement);
  * @param {string} tag - Name of the tag. If not specified, name of the component used.
  */
 export function registerCustomElement(vueComponent: any, tag?: string): void {
-    const options = typeof vueComponent === "function"
-        ? vueComponent.options
-        : vueComponent;
-
-    Vue.customElement(tag || options.name, options);
+    const CustomElement = wrap(Vue, vueComponent)
+    window.customElements.define(tag, CustomElement)
 }
