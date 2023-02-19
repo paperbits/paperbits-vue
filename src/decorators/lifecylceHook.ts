@@ -6,6 +6,8 @@
  * found in the LICENSE file and at https://paperbits.io/license/mit.
  */
 
+import { MetadataKeys } from "../constants";
+
 /**
  * Vue JS lifecycle hook helper.
  * https://vuejs.org/v2/guide/instance.html#Instance-Lifecycle-Hooks
@@ -13,6 +15,6 @@
  */
 export function LifecycleHook(hookName: string): any {
     return function (target: any, propertyKey: string): any {
-        Reflect.defineMetadata("lifecycle", hookName, target[propertyKey]);
+        Reflect.defineMetadata(MetadataKeys.Lifecycle, hookName, target[propertyKey]);
     };
 }

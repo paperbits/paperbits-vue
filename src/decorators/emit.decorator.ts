@@ -7,7 +7,7 @@
  */
 
 export function Emit(eventName: string): PropertyDecorator {
-    return function (target: any, propertyKey: string) {
+    return function (target: Object, propertyKey: string | symbol) {
         target[propertyKey] = function (...args) {
             this.$emit(eventName, ...args);
         };

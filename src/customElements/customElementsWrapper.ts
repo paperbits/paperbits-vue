@@ -12,9 +12,10 @@ import {
     getInitialProps,
     createCustomEvent,
     convertAttributeValue
-} from './utils';
+} from "../customElements/customElementsUtils";
+import { IInjector } from "@paperbits/common/injection";
 
-export default function wrap(Vue, Component) {
+export default function wrap(Vue, Component, injector?: IInjector) {
     const useShadowDOM: boolean = false;
     const isAsync = typeof Component === 'function' && !Component.cid;
 
@@ -86,18 +87,37 @@ export default function wrap(Vue, Component) {
 
         constructor() {
             super()
-            if (useShadowDOM) this.attachShadow({ mode: 'open' })
+            if (useShadowDOM) {
+                this.attachShadow({ mode: 'open' });
+            }
+
+            let dataFunction;
+
+
+            if (injector) {
+                // const componentBinder = injector.resolve<ComponentBinder>("vueComponentBinder");
+                // componentBinder.bind(this, Component);
+
+                dataFunction = () => {
+                    const resolution = injector.resolveClass(Component);
+                    return resolution;
+                };
+            }
+            else {
+                dataFunction = () => {
+                    return {
+                        props: {},
+                        slotChildren: []
+                    }
+                }
+            }
+
 
             this._wrapper = new Vue({
                 name: 'shadow-root',
                 customElement: this,
                 shadowRoot: this.shadowRoot,
-                data() {
-                    return {
-                        props: {},
-                        slotChildren: []
-                    }
-                },
+                data: dataFunction,
                 render(h) {
                     return h(Component, {
                         ref: 'inner',
@@ -150,6 +170,8 @@ export default function wrap(Vue, Component) {
                     syncInitialAttributes()
                 }
                 else {
+
+
                     // async & unresolved
                     Component().then(resolved => {
                         if (resolved.__esModule || resolved[Symbol.toStringTag] === 'Module') {

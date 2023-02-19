@@ -11,5 +11,4 @@ export * from "./computed.decorator";
 export * from "./decorators";
 export * from "./emit.decorator";
 export * from "./prop.decorator";
-export * from "./runtimeComponent.decorator";
 export * from "./watch.decorator";

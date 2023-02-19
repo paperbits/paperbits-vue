@@ -6,8 +6,10 @@
  * found in the LICENSE file and at https://paperbits.io/license/mit.
  */
 
+import { MetadataKeys } from "../constants";
+
 export function Computed(): MethodDecorator {
-    return function (target: any, propertyKey: string) {
-        Reflect.defineMetadata("computed", propertyKey, target[propertyKey]);
+    return function (target: Object, propertyKey: string | symbol) {
+        Reflect.defineMetadata(MetadataKeys.Computed, propertyKey, target[propertyKey]);
     };
 }

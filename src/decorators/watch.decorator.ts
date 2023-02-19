@@ -7,9 +7,10 @@
  */
 
 import "reflect-metadata";
+import { MetadataKeys } from "../constants";
 
 export function Watch(propertyName: string): MethodDecorator {
-    return function (target: any, propertyKey: string): any {
-        Reflect.defineMetadata("watch", propertyName, target[propertyKey]);
+    return function (target: Object, propertyKey: string | symbol): any {
+        Reflect.defineMetadata(MetadataKeys.Watch, propertyName, target[propertyKey]);
     };
 }
