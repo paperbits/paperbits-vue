@@ -90,6 +90,10 @@ export function registerCustomElement(vueComponent: any /* class or Vue.Componen
         }
 
         public disconnectedCallback(): void {
+            if (!this.instance) {
+                return;
+            }
+            
             this.instance.$destroy();
         }
     }
