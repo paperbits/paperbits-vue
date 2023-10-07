@@ -29,16 +29,13 @@ export class VueComponentBinder implements ComponentBinder {
 
         const classInstance = new vueComponent();
 
-        const container = document.createElement("div");
-        element.appendChild(container);
-
         if (componentParams) {
             Object.keys(componentParams).forEach(propertyName => {
                 classInstance[propertyName] = componentParams[propertyName];
             });
         }
 
-        const viewModelInstance = classInstance.$mount(container);
+        const viewModelInstance = classInstance.$mount(element);
         return viewModelInstance;
     }
 
