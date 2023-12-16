@@ -1,6 +1,6 @@
 {
     "name": "@paperbits/vue",
-    "version": "1.0.6",
+    "version": "1.0.8",
     "description": "Vue modules for Paperbits.",
     "license": "MIT",
     "author": "Paperbits",
@@ -13,8 +13,8 @@
         "vue"
     ],
     "dependencies": {
-        "@paperbits/common": "0.1.559",
-        "reflect-metadata": "^0.1.13",
+        "@paperbits/common": "0.1.604",
+        "reflect-metadata": "^0.1.14",
         "vue": "^2.7.15",
         "vue-server-renderer": "^2.7.15"
     }

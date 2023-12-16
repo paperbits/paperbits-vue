@@ -1,11 +1,11 @@
 import { IInjectorModule, IInjector } from "@paperbits/common/injection";
-import { VueComponentBinder } from "./bindings";
-import { ComponentFactoryBrowser } from "./bindings/componentFactory.browser";
+import { VueComponentBinder } from "./bindings/vueComponentBinder";
+import { ComponentFactoryServer } from "./bindings/componentFactory.server";
 
 
 export class VueModule implements IInjectorModule {
     public register(injector: IInjector): void {
-        injector.bindSingleton("componentFactory", ComponentFactoryBrowser);
+        injector.bindSingleton("componentFactory", ComponentFactoryServer);
         injector.bindSingleton("vueComponentBinder", VueComponentBinder);
     }
 }

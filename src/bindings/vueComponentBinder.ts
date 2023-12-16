@@ -5,17 +5,17 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file and at https://paperbits.io/license/mit.
  */
-import Vue from "vue";
 import { ComponentBinder } from "@paperbits/common/components";
 import { IInjector } from "@paperbits/common/injection";
 import { MetadataKeys } from "../constants";
-
+import { ComponentFactory } from "./componentFactory";
 
 
 export class VueComponentBinder implements ComponentBinder {
-    private renderer: any;
-
-    constructor(private readonly injector: IInjector) { }
+    constructor(
+        private readonly injector: IInjector,
+        private readonly componentFactory: ComponentFactory
+    ) { }
 
     public async bind<TInstance>(element: Element, componentDefinition: unknown, componentParams?: unknown): Promise<TInstance> {
         const constructor = <any>componentDefinition;
@@ -39,20 +39,7 @@ export class VueComponentBinder implements ComponentBinder {
             });
         }
 
-        let viewModelInstance: TInstance;
-
-        if (typeof process === "object") {
-            if (!this.renderer) {
-                const module = await import("vue-server-renderer");
-                this.renderer = module.createRenderer();
-            }
-
-            element.innerHTML = await this.renderer.renderToString(classInstance);
-            viewModelInstance = <TInstance>new Vue(classInstance);
-        }
-        else {
-            viewModelInstance = classInstance.$mount(element);
-        }
+        const viewModelInstance = await this.componentFactory.createInstance(element, classInstance);
 
         return <TInstance>viewModelInstance;
     }
