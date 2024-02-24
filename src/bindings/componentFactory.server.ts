@@ -1,4 +1,3 @@
-import Vue from "vue";
 import { Renderer, createRenderer } from "vue-server-renderer";
 import { ComponentFactory } from "./componentFactory";
 
@@ -10,8 +9,11 @@ export class ComponentFactoryServer implements ComponentFactory {
     }
 
     public async createInstance<TInstance>(element: Element, classInstance: any): Promise<TInstance> {
-        element.outerHTML = await this.renderer.renderToString(classInstance);
-        const viewModelInstance = <TInstance>new Vue(classInstance);
+        const viewModelInstance = classInstance.$mount(element);
+
+        setImmediate(async () => { // giving model binders a chance to pickup updates
+            element.outerHTML = await this.renderer.renderToString(viewModelInstance);
+        });
 
         return viewModelInstance;
     }
