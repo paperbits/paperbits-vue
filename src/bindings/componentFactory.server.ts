@@ -10,7 +10,7 @@ export class ComponentFactoryServer implements ComponentFactory {
     }
 
     public async createInstance<TInstance>(element: Element, classInstance: any): Promise<TInstance> {
-        element.innerHTML = await this.renderer.renderToString(classInstance);
+        element.outerHTML = await this.renderer.renderToString(classInstance);
         const viewModelInstance = <TInstance>new Vue(classInstance);
 
         return viewModelInstance;
